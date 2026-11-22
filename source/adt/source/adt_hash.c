@@ -25,13 +25,15 @@
 hash hash_callback_str(const hash_key key)
 {
 	/* djb2 */
-	const char *str = (const char *)key;
+	const unsigned char *str = (const unsigned char *)key;
 
 	hash h = 0x1505;
 
-	while (*str++ != '\0')
+	unsigned char c;
+
+	while ((c = *str++) != '\0')
 	{
-		h = (hash)(((h << 5) + h) + *str);
+		h = (hash)(((h << 5) + h) + c);
 	}
 
 	return h;
